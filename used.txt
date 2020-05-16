@@ -1,0 +1,6 @@
+express
+    -cookie parser
+
+node
+    -nodemon
+    
