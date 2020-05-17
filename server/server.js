@@ -65,3 +65,23 @@ app.post(`/startSession/:cookie/:width/:time`, (req, res) => {
 app.post(`/addWheels/:left_w_speed/:right_w_speed/:time`, (req, res) => {
 
 });
+
+//(3)
+app.post(`/addEcho/:distance/:time`, (req, res) => {
+
+});
+
+//(4)
+app.post(`/addLine/:l1/:l2/:l3/:time`, (req, res) => {
+
+});
+
+//(5)
+app.post(`/addOther/:ir/:time`, (req, res) => {
+
+});
+
+//(6)
+app.post(`/end/:time`, (req, res) => {
+
+});
