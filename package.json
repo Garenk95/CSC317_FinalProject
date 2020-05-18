@@ -1,29 +1,29 @@
 {
-  "name": "csc317_finalproject",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "server": "nodemon server/server.js",
-    "start": "node server/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Garenk95/CSC317_FinalProject.git"
-  },
-  "author": "Garen Kantarci",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Garenk95/CSC317_FinalProject/issues"
-  },
-  "homepage": "https://github.com/Garenk95/CSC317_FinalProject#readme",
-  "dependencies": {
-    "cookie-parser": "^1.4.5",
-    "express": "^4.17.1",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4",
-    "prettier": "^2.0.5"
-  }
+    "name": "csc317_finalproject",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "server": "nodemon src/index.js",
+        "start": "node src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Garenk95/CSC317_FinalProject.git"
+    },
+    "author": "Garen Kantarci",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Garenk95/CSC317_FinalProject/issues"
+    },
+    "homepage": "https://github.com/Garenk95/CSC317_FinalProject#readme",
+    "dependencies": {
+        "cookie-parser": "^1.4.5",
+        "express": "^4.17.1",
+        "mysql": "^2.18.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4",
+        "prettier": "^2.0.5"
+    }
 }
