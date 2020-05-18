@@ -55,7 +55,7 @@ app.get(`/end`, (req, res) => {
 });
 
 //these functions store in database? maybe?
-//const store = require('./store');
+
 //(1)
 app.post(`/startSession/:cookie/:width/:time`, (req, res) => {
     //make new table with cookie name?
