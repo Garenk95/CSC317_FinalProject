@@ -1,87 +1,51 @@
 const express = require('express');
-let cookieParser = require('cookie-parser');
+const createDB = require('./node_create_DB');
+var cookieParser = require('cookie-parser');
 const app = express();
 const port = 3000;
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 app.use(cookieParser());
 
-//SESSION STARTS WITH "/REGISTER" AND ENDS WITH "/END"
-//"/REGISTER" SETS A COOKIE, "/END" REMOVES COOKIE
-//EVERYTHING BETWEEN IS OF THAT SESSION
+let sessionID = 0;
 
-//Adds a new vehicle run to the system, should return a cookie called USER=[name] 
-//that would be included for the other commands. Width is the width of the vehicle in cm.
 app.get(`/register`, (req, res) => {
-    res.send(`session starting!
-    \nThe name of the cookie (session): ${req.query.name}
-    \nThe distance between the wheels (width) is: ${req.query.width}cm\n`);
+    //------->need to write better code to generate a uniqueID<-----------
+    var date = new Date();
+    sessionID++;
+    createDB.addSession(sessionID, req.query.name, date, req.query.width, req.query.time);
+    res.send('A new session has been added to the session table');
 });
 
-//THIS IS THE ONLY DATA THAT NEEDS TO BE PROCESSED
-//EVERYTHING ELSE IS STORED AND DISPLAYED
-//Records the speed of the left and right wheel in cm/sec for that vehicle in the current session
 app.get('/wheels', (req, res) => {
-    res.send(`The left wheel is moving at ${req.query.left} cm/sec
-    \nThe right wheel is moving at ${req.query.right} cm/sec\n`);
+    const date = new Date();
+    createDB.addSessionData(sessionID, 'left_wheel', req.query.left, date, req.query.time, '/wheels');
+    createDB.addSessionData(sessionID, 'right_wheel', req.query.right, date, req.query.time, '/wheels');
+    res.send(`New wheel data has been stored in session_data table`);
 });
 
-//Records the result of the echo sensor in cm for the vehicle in the current session
 app.get('/echo', (req, res) => {
-    res.send(`The distance is: ${req.query.dist}\n`);
+    const date = new Date();
+    createDB.addSessionData(sessionID, 'dist', req.query.dist, date, req.query.time, '/echo');
+    res.send(`New distance data has been stored in session_data table`);
 });
-
 
 app.get('/line', (req, res) => {
-    output = "";
+    const date = new Date();
     for (key in req.query) {
-        //instead of outputting, write this to database
-        output = output + `For the item: ${key} the value is ${req.query[key]}` + `\n`;
+        createDB.addSessionData(sessionID, key, req.query[key], date, req.query.time, '/line');
     }
-    res.send(output);
+    res.send("New line data has been stored in session_data table");
 });
 
 app.get(`/other`, (req, res) => {
-    output = "";
+    const date = new Date();
     for (key in req.query) {
-        //instead of outputting, write this to database
-        output = output + `For the item: ${key} the value is ${req.query[key]}` + `\n`;
+        createDB.addSessionData(sessionID, key, req.query[key], date, req.query.time, '/other');
     }
-    res.send(output);
+    res.send("New other data has been stored in session_data table");
 });
 
 app.get(`/end`, (req, res) => {
     res.send(`session ending!`);
-});
-
-//these functions store in database? maybe?
-
-//(1)
-app.post(`/startSession/:cookie/:width/:time`, (req, res) => {
-    //make new table with cookie name?
-});
-
-//(2)
-app.post(`/addWheels/:left_w_speed/:right_w_speed/:time`, (req, res) => {
-
-});
-
-//(3)
-app.post(`/addEcho/:distance/:time`, (req, res) => {
-
-});
-
-//(4)
-app.post(`/addLine/:l1/:l2/:l3/:time`, (req, res) => {
-
-});
-
-//(5)
-app.post(`/addOther/:ir/:time`, (req, res) => {
-
-});
-
-//(6)
-app.post(`/end/:time`, (req, res) => {
-
 });
