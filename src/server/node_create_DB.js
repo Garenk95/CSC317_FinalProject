@@ -1,9 +1,10 @@
-var mygssql = require('mysql')
+var mysql = require('mysql')
 
 var con = mysql.createConnection({
-    host: 'http://localhost:5432',
+    host: 'localhost',
     user: 'user',
-    password: 'cscdb',
+    port: '3306',
+    password: '',
 })
 
 con.connect(function (err) {
