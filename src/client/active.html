@@ -24,28 +24,25 @@ Alex 5/7/20 2:17 (linkToDataReview) (linkToMap) -->
     <meta charset="utf-8">
 
     <title>Active Sessions</title>
+    <script src="../js_files/active.js"></script>
 
 </head>
 
 <body>
-    <table id="active_session_table" style="width:100%">
-        <tr>
-            <th>Session Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Data Review</th>
-            <th>Map</th>
-        </tr>
-        <!-- <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-        <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-        </tr> -->
+    <script>refreshData();</script>
+    <table id="active_session_table">
+        <div id="showData">
+            <tr>
+                <th>Session ID</th>
+                <th>Session Name</th>
+                <th>Date</th>
+                <th>IsActive</th>
+                <th>Width</th>
+                <th>Time</th>
+                <th>Data Review</th>
+                <th>Map</th>
+            </tr>
+        </div>
     </table>
 </body>
 

@@ -25,7 +25,7 @@ con.connect(function (err) {
         console.log('"sessions" table created');
     });
     console.log('Attempting to create table "session_data"');
-    con.query('CREATE TABLE IF NOT EXISTS session_data(sessionID VARCHAR(255), item VARCHAR(255), value VARCHAR(255), date VARCHAR(255), time VARCHAR(255), url VARCHAR(255))', function (error, result) {
+    con.query('CREATE TABLE IF NOT EXISTS session_data(sessionID VARCHAR(255), name VARCHAR(255), item VARCHAR(255), value VARCHAR(255), date VARCHAR(255), time VARCHAR(255), url VARCHAR(255))', function (error, result) {
         if (error) throw error;
         console.log('"session_data" created');
     });
@@ -36,11 +36,12 @@ module.exports = {
         var sql = `INSERT INTO sessions (sessionID, name, date, isActive, width, time) VALUES (${id}, '${name}', '${date}', 'y', ${width}, ${time})`;
         con.query(sql, (err, res) => {
             if (err) throw err;
+            console.log("WE GOT TO THIS POINT IN THE addSession FUNCTION");
             console.log("record inserted into 'sessions'");
         });
     },
-    addSessionData: function (id, item, value, date, time, url) {
-        var sql = `INSERT INTO session_data(sessionID, item, value, date, time, url) VALUES (${id}, '${item}', ${value}, '${date}', ${time}, '${url}')`;
+    addSessionData: function (id, name, item, value, date, time, url) {
+        var sql = `INSERT INTO session_data(sessionID, name, item, value, date, time, url) VALUES (${id}, '${name}', '${item}', ${value}, '${date}', ${time}, '${url}')`;
         con.query(sql, (err, res) => {
             if (err) throw err;
             console.log("record inserted into 'session_data'");
@@ -48,5 +49,40 @@ module.exports = {
     },
     endSession: function (id, name, date, time) {
         //modify session in session table to change active from y to n
+        var sql = `INSERT INTO session_data(sessionID, name, item, value, date, time, url) VALUES (${id}, '${name}', 'N/A', 'N/A', '${date}', ${time}, '/end')`;
+        con.query(sql, (err, res) => {
+            if (err) throw err;
+            console.log("inserting final session data for user");
+        });
+        sql = `UPDATE sessions SET isActive = 'n' WHERE name = '${name}'`;
+        con.query(sql, (err, res) => {
+            if (err) throw err;
+            console.log("ended a session, changing isActive to 'n'");
+        });
+    },
+    getActiveSessions: async () => {
+        //go into sessions table
+        //check if there is data
+        let test = [];
+        var sql = `SELECT * FROM sessions WHERE isActive = 'y'`;
+        const promise = new Promise((resolve, reject) => {
+            con.query(sql, (err, res) => {
+                if (err) throw err;
+                //console.log(res);
+                for (let [key, value] of Object.entries(res)) {
+                    let obj = {
+                        sessionID: value.sessionID,
+                        name: value.name,
+                        date: value.date,
+                        isActive: value.isActive,
+                        width: value.width,
+                        time: value.time
+                    };
+                    test.push(obj);
+                }
+                resolve(test);
+            });
+        });
+        return await promise;
     }
 };

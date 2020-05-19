@@ -579,6 +579,7 @@ curl localhost:3000/wheels?left=3.000000\&right=2.000000\&time=14400 --cookie "U
 curl localhost:3000/echo?dist=9.220000\&time=14410 --cookie "USER=bob"
 curl localhost:3000/line?l1=1\&l2=1\&l3=1\&time=14420 --cookie "USER=bob"
 curl localhost:3000/other?ir=0\&time=14430 --cookie "USER=bob"
+curl localhost:3000/register?name=garen\&width=13.970000\&time=0
 curl localhost:3000/wheels?left=3.000000\&right=2.000000\&time=14500 --cookie "USER=bob"
 curl localhost:3000/echo?dist=9.220000\&time=14510 --cookie "USER=bob"
 curl localhost:3000/line?l1=1\&l2=1\&l3=1\&time=14520 --cookie "USER=bob"
@@ -1504,3 +1505,8 @@ curl localhost:3000/echo?dist=9.220000\&time=37510 --cookie "USER=bob"
 curl localhost:3000/line?l1=1\&l2=1\&l3=1\&time=37520 --cookie "USER=bob"
 curl localhost:3000/other?ir=0\&time=37530 --cookie "USER=bob"
 curl localhost:3000/end?time=37600 --cookie "USER=bob"
+curl localhost:3000/wheels?left=0.000000\&right=0.000000\&time=0 --cookie "USER=garen"
+curl localhost:3000/end?time=37600 --cookie "USER=garen"
+curl localhost:3000/register?name=david\&width=13.970000\&time=0
+curl localhost:3000/wheels?left=0.000000\&right=0.000000\&time=0 --cookie "USER=david"
+curl localhost:3000/end?time=37600 --cookie "USER=david"
