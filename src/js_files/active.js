@@ -36,7 +36,7 @@ function displayActiveSessions() {
                     i++;
                 }
                 newCell = newRow.insertCell(6);
-                newCell.appendChild(createButton("Data Review"));
+                newCell.appendChild(createButton("Data Review", object.sessionID));
                 newCell = newRow.insertCell(7);
                 newCell.appendChild(createButton("Map"));
             }
@@ -44,9 +44,12 @@ function displayActiveSessions() {
         })
         .catch(error => console.log('error', error));
 }
-function createButton(button_inner_html) {
+function createButton(button_inner_html, id) {
     let btn = document.createElement("BUTTON");
     btn.innerHTML = button_inner_html;
+    btn.onclick = function () {
+        window.location.href = `../client/datareview.html?session=${id}`;
+    };
     return btn;
 }
 function sessionInTable(table, id) {

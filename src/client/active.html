@@ -24,14 +24,20 @@ Alex 5/7/20 2:17 (linkToDataReview) (linkToMap) -->
     <meta charset="utf-8">
 
     <title>Active Sessions</title>
+    <link rel="stylesheet" href="stylesheets/active_stylesheet.css">
     <script src="../js_files/active.js"></script>
 
 </head>
+<header>
+    <div class="header_box">
+        <h1>Active Sessions</h1>
+    </div>
+</header>
 
 <body>
     <script>refreshData();</script>
-    <table id="active_session_table">
-        <div id="showData">
+    <div class="table_container">
+        <table id="active_session_table">
             <tr>
                 <th>Session ID</th>
                 <th>Session Name</th>
@@ -42,8 +48,8 @@ Alex 5/7/20 2:17 (linkToDataReview) (linkToMap) -->
                 <th>Data Review</th>
                 <th>Map</th>
             </tr>
-        </div>
-    </table>
+        </table>
+    </div>
 </body>
 
 </html>

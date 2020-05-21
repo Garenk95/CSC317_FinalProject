@@ -6,30 +6,38 @@
     <meta charset="utf-8">
 
     <title>Review Sessions</title>
+    <link rel="stylesheet" href="stylesheets/review_stylesheet.css">
+    <script src="../js_files/review.js"></script>
 
 </head>
+<header>
+    <div class="header_box">
+        <h1>Review Sessions</h1>
+    </div>
+</header>
 
 <body>
-    <table id="review_session_table" style="width:100%">
-        <tr>
-            <th>Session Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Active</th>
-            <th>Data Review</th>
-            <th>Map</th>
-        </tr>
-        <!-- <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-        <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-        </tr> -->
-    </table>
+    <div class="body_container">
+        <script>refreshData();</script>
+        <div class="filter_container">
+            <input type="text" id="name" onkeyup="filter(1, 'name')" placeholder="Filter by name">
+            <input type="text" id="date" onkeyup="filter(2, 'date')" placeholder="Filter by date">
+        </div>
+        <div class="table_container">
+            <table id="review_session_table">
+                <tr>
+                    <th>Session ID</th>
+                    <th>Session Name</th>
+                    <th>Date</th>
+                    <th>IsActive</th>
+                    <th>Width</th>
+                    <th>Time</th>
+                    <th>Data Review</th>
+                    <th>Map</th>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>

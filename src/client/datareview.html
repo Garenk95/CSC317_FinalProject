@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Data Review</title>
+    <link rel="stylesheet" href="stylesheets/data_review_stylesheet.css">
+    <script src="../js_files/datareview.js"></script>
+
+</head>
+<header>
+    <div class="header_box">
+        <h1>Data Review</h1>
+    </div>
+</header>
+
+<body onload="load_data()">
+    <script>refreshData();</script>
+    <div class="body_container">
+        <div class="filter_container">
+            <input type="text" id="item" onkeyup="filter(2, 'item')" placeholder="Filter by Item">
+            <input type="text" id="url" onkeyup="filter(6, 'url')" placeholder="Filter by URL">
+        </div>
+        <div class="table_container">
+            <table id="data_review_table">
+                <tr>
+                    <th>Session ID</th>
+                    <th>Session Name</th>
+                    <th>Item</th>
+                    <th>Value</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>URL</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

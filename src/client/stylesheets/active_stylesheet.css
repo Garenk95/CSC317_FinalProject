@@ -1,0 +1,18 @@
+.header_box{
+    display: flex;
+    justify-content: center;
+}
+.table_container{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+#active_session_table{
+    display: inherit;
+    text-align: center;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 15px;
+}

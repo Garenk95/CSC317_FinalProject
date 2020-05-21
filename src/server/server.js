@@ -20,13 +20,10 @@ function getCookie(req) {
     };
     return returnObj;
 }
-
 let sessionID = 0;
 let sessionObjArray = [];
 
 app.get(`/register`, (req, res) => {
-    console.log("WE GOT TO THIS POINT IN THE register FUNCTION");
-    //------->need to write better code to generate a uniqueID<-----------
     var date = new Date();
     sessionID++;
     let sessionObj = {
@@ -36,7 +33,6 @@ app.get(`/register`, (req, res) => {
     sessionObjArray.push(sessionObj);
     createDB.addSession(sessionID, req.query.name, date, req.query.width, req.query.time);
     res.cookie(`USER`, req.query.name).send('cookie set');
-    //res.send('A new session has been added to the session table');
 });
 
 app.get('/wheels', (req, res) => {
@@ -73,15 +69,10 @@ app.get(`/other`, (req, res) => {
 });
 
 app.get(`/end`, (req, res) => {
-    // const date = new Date();
-    // let sessionName = sessionObjArray[req.name].
-    //     createDB.endSession(req.);
     let obj = getCookie(req);
-    console.log('getCookie was called');
     const date = new Date();
-    console.log(`id is: ${obj.id}, and the cookieName is: ${obj.cookieName}`);
     createDB.endSession(obj.id, obj.cookieName, date, req.query.time);
-    console.log("WE GOT TO THIS POINT IN THE end FUNCTION");
+    res.send("null");
 });
 
 //following functions are for front end js files to get data from database
@@ -90,5 +81,17 @@ app.get(`/getActiveSessions`, async (req, res) => {
     let activeSessionArray = await createDB.getActiveSessions();
     console.log('sending response to active.js');
     res.send(activeSessionArray);
+});
+app.get(`/getAllSessions`, async (req, res) => {
+    let allSessionArray = await createDB.getAllSessions();
+    console.log(`sending response to review.js`);
+    res.send(allSessionArray);
+});
+app.get(`/getDataReview/:id`, async (req, res) => {
+    console.log("FASDJKLFGDFHSDKLFSADHJFHADSLKFDJSFHLASDF");
+    console.log(req.params.id);
+    let dataArray = await createDB.getDataReview(req.params.id);
+    console.log(`sending response to datareview.js`);
+    res.send(dataArray);
 });
 

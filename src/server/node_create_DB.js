@@ -84,5 +84,52 @@ module.exports = {
             });
         });
         return await promise;
+    },
+    getAllSessions: async () => {
+        let test = [];
+        var sql = `SELECT * FROM sessions`;
+        const promise = new Promise((resolve, reject) => {
+            con.query(sql, (err, res) => {
+                if (err) throw err;
+                //console.log(res);
+                for (let [key, value] of Object.entries(res)) {
+                    let obj = {
+                        sessionID: value.sessionID,
+                        name: value.name,
+                        date: value.date,
+                        isActive: value.isActive,
+                        width: value.width,
+                        time: value.time
+                    };
+                    test.push(obj);
+                }
+                resolve(test);
+            });
+        });
+        return await promise;
+    },
+    getDataReview: async (id) => {
+        let test = [];
+        var sql = `SELECT * FROM session_data WHERE sessionID = ${id}`;
+        const promise = new Promise((resolve, reject) => {
+            con.query(sql, (err, res) => {
+                if (err) throw err;
+                //console.log(res);
+                for (let [key, value] of Object.entries(res)) {
+                    let obj = {
+                        sessionID: value.sessionID,
+                        name: value.name,
+                        item: value.item,
+                        value: value.value,
+                        date: value.date,
+                        time: value.time,
+                        url: value.url
+                    };
+                    test.push(obj);
+                }
+                resolve(test);
+            });
+        });
+        return await promise;
     }
 };
